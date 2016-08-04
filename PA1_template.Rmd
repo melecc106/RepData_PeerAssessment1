@@ -1,4 +1,4 @@
-Reproducible Research Course Project 1
+#Reproducible Research Course Project 1
 Melanie Eccles
 =========================================================================================
 ```{r setup, include=FALSE}
@@ -11,13 +11,9 @@ Read the activity monotoring data set into R
 activity<-read.csv("activity.csv")
 ```
 
-Change the class of the steps and date columns to "numeric" and "Date" respectively
+Change the class of the steps column to "numeric" 
 ```{r}
 activity$steps<-as.numeric(activity$steps)
-
-lct <- Sys.getlocale("LC_TIME"); Sys.setlocale("LC_TIME", "C")
-activity$date<-as.Date(activity$date, format= "%Y%m%d")
-Sys.setlocale("LC_TIME", lct)
 ```
 
 ##What is mean total number of steps taken per day?
@@ -110,6 +106,7 @@ After the missing values were imputed with the mean for each interval, the plot 
 Load the dplyr package to add a column that was mutated to show the weektype
 ```{r}
 library(dplyr)
+activity2$date<-as.Date(activity2$date)
 activity2<- activity2 %>%mutate(weektype=ifelse(weekdays(activity2$date)=="Saturday"|
                           weekdays(activity2$date)=="Sunday", "Weekend", "Weekday"))
 activity2$weektype<-as.factor(activity2$weektype)
